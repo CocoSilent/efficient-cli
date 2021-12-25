@@ -62,7 +62,6 @@ function start() {
         }
         process.exitCode = 1
     })
-
     program.parseAsync(process.argv)
 }
 

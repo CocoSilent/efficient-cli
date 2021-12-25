@@ -9,5 +9,5 @@ export const info = (text: string) => {
 }
 
 export const error = (text: string) => {
-  console.log(chalk.bgRed(`\n${text}\n`))
+  console.log(chalk.red(`\n${text}\n`))
 }

@@ -4,7 +4,8 @@
   "description": "下载优秀开源模板的脚手架",
   "main": "./build",
   "bin": {
-    "efficient": "./bin.js"
+    "efficient": "bin/bin.js",
+    "efficient-local": "bin/bin-local.js"
   },
   "scripts": {
     "clear": "rimraf build",
@@ -21,6 +22,7 @@
   ],
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^17.0.4",
     "rimraf": "^3.0.2",
     "ts-node": "^10.4.0",
     "tslint": "^6.1.3",

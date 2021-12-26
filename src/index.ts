@@ -1,11 +1,11 @@
-import 'globby/index';
-import * as globby from 'globby';
-import * as commander from 'commander';
-import * as path from 'path';
+import 'globby/index'
+import * as globby from 'globby'
+import * as commander from 'commander'
+import * as path from 'path'
 import { error, chalk, fs, info } from './lib'
 import * as pacote from 'pacote'
 
-const { program } = commander;
+const { program } = commander
 
 
 let commandsPath = []
@@ -23,7 +23,7 @@ const getCommand = () => {
 const getPkgInfo = () => {
     const jsonPath = path.join(__dirname, '../package.json')
     const jsonContent = fs.readFileSync(jsonPath, 'utf-8')
-    const jsonResult = JSON.parse(jsonContent);
+    const jsonResult = JSON.parse(jsonContent)
     pkgVersion = jsonResult.version
     pkgName =  jsonResult.name
 }
@@ -35,7 +35,7 @@ const getLatestVersion = async () => {
 }
 
 function start() {
-    commandsPath = getCommand();
+    commandsPath = getCommand()
     commandsPath.forEach((commandPath) => {
         const commandObj = require(`./${commandPath}`)
         const { command, description, optionList, action } = commandObj.default
@@ -50,14 +50,14 @@ function start() {
         })
     })
 
-    getPkgInfo();
-    program.version(pkgVersion);
+    getPkgInfo()
+    program.version(pkgVersion)
 
     program.on('command:*', async ([cmd]) => {
         program.outputHelp()
         error(`未知命令 command ${chalk.yellow(cmd)}.`)
         const latestVersion = await getLatestVersion()
-        if(latestVersion !== pkgVersion){
+        if (latestVersion !== pkgVersion) {
             info(`可更新版本，${chalk.green(pkgVersion)} -> ${chalk.green(latestVersion)} \n执行npm install -g ${pkgName}`)
         }
         process.exitCode = 1
@@ -65,4 +65,4 @@ function start() {
     program.parseAsync(process.argv)
 }
 
-start();
+start()

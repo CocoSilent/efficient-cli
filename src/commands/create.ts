@@ -1,4 +1,4 @@
-import * as path from 'path';
+import * as path from 'path'
 import * as inquirer from 'inquirer'
 import * as execa from 'execa'
 import * as handlebars from 'handlebars'
@@ -53,17 +53,17 @@ const getQuestions = async (projectName: string) => {
 }
 
 const cloneProject = async (targetDir: string, projectName: string, projectInfo: any) => {
-    startSpinner(`开始创建仓库 ${chalk.cyan(targetDir)}`);
+    startSpinner(`开始创建仓库 ${chalk.cyan(targetDir)}`)
     // 复制'project-template'到目标路径下创建工程
     await fs.copy(
         path.join(__dirname, '..', '..', 'template'),
         targetDir
     )
     // handlebars模版引擎解析用户输入的信息存在package.json
-    const jsonPath = `${targetDir}/package.json`;
-    const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
-    const jsonResult = handlebars.compile(jsonContent)(projectInfo);
-    fs.writeFileSync(jsonPath, jsonResult);
+    const jsonPath = `${targetDir}/package.json`
+    const jsonContent = fs.readFileSync(jsonPath, 'utf-8')
+    const jsonResult = handlebars.compile(jsonContent)(projectInfo)
+    fs.writeFileSync(jsonPath, jsonResult)
 
     execa.commandSync('npm install', {
         stdio: 'inherit',
@@ -83,13 +83,13 @@ const action = async (projectName: string, cmdArgs: any) => {
             (cmdArgs && cmdArgs.context) || process.cwd(),
             projectName
         )
-        console.log(targetDir);
+        console.log(targetDir)
         if (!(await checkProjectExist(targetDir))) {
-            const projectInfo = await getQuestions(projectName);
-            await cloneProject(targetDir, projectName, projectInfo);
+            const projectInfo = await getQuestions(projectName)
+            await cloneProject(targetDir, projectName, projectInfo)
         }
     } catch (e) {
-        console.log(e);
+        console.log(e)
     }
 }
 export default {

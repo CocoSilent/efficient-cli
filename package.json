@@ -13,6 +13,10 @@
     "publish": "npm run build && npm publish",
     "lint": "tslint ./src/**/*.ts --fix"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CocoSilent/efficient-cli.git"
+  },
   "author": "xiaosailun@163.com",
   "keywords": [
     "cli",
